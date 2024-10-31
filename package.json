@@ -1,9 +1,14 @@
 {
   "name": "tap-v2",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^18.0.0"
+  },
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "prepare:sepolia": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:arb-sepolia": "mustache config/arb-sepolia.json subgraph.template.yaml > subgraph.yaml",
     "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ tap-v2",
     "create-local": "graph create --node http://localhost:8020/ tap-v2",
     "remove-local": "graph remove --node http://localhost:8020/ tap-v2",
