@@ -18,6 +18,7 @@
   "dependencies": {
     "@graphprotocol/graph-cli": "0.87.0",
     "@graphprotocol/graph-ts": "0.32.0",
+    "mustache": "^4.2.0",
     "util": "^0.12.5"
   },
   "devDependencies": {

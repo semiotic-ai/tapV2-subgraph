@@ -10,7 +10,7 @@ dataSources:
     source:
       address: '{{TapCollector.address}}'
       abi: TapCollector
-      startBlock: '{{TapCollector.startBlock}}'
+      startBlock: {{TapCollector.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -44,7 +44,7 @@ dataSources:
     source:
       address: '{{PaymentsEscrow.address}}'
       abi: PaymentsEscrow
-      startBlock: '{{PaymentsEscrow.startBlock}}'
+      startBlock: {{PaymentsEscrow.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
