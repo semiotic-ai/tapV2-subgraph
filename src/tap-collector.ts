@@ -7,7 +7,6 @@ import {
 } from "../generated/TapCollector/TapCollector"
 /* eslint-disable prefer-const */
 import { BigInt, Bytes } from '@graphprotocol/graph-ts'
-import { runTests } from "../tests/tap-collector.test"
 import {
   Transaction,
   Payer,
