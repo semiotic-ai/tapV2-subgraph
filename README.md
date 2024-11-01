@@ -50,3 +50,8 @@ yarn deploy-local
 
 It will stop indexing the old code, and start the new one in its place.
 
+### filling .env
+
+There are contract addresses in `.env.exmaple` that must be chosen
+based on the network. Put them into a `.env` for proper usage
+

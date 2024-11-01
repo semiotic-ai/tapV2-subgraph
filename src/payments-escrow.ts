@@ -10,10 +10,11 @@ import {
   Transaction,
 } from '../generated/schema'
 import { createOrLoadCollector, createOrLoadEscrowAccount, createOrLoadPayer, createOrLoadReceiver } from "./tap-utils"
+import "dotenv/config";
 
 const ZERO_BI = BigInt.fromI32(0)
 // Todo receive actual address
-const COLLECTOR_ADDRESS = Address.fromString(process.env.COLLECTOR_ADDRESS);
+const COLLECTOR_ADDRESS = Address.fromString(String(process.env.COLLECTOR_ADDRESS));
 
 export function handleThaw(event: Thaw): void {
   let payer = createOrLoadPayer(event.params.payer)
