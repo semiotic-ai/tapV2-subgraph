@@ -13,7 +13,7 @@ import { createOrLoadCollector, createOrLoadEscrowAccount, createOrLoadPayer, cr
 
 const ZERO_BI = BigInt.fromI32(0)
 // Todo receive actual address
-const COLLECTOR_ADDRESS = Address.fromString("0x0000000000000000000000000000000000000001");
+const COLLECTOR_ADDRESS = Address.fromString(process.env.COLLECTOR_ADDRESS);
 
 export function handleThaw(event: Thaw): void {
   let payer = createOrLoadPayer(event.params.payer)
