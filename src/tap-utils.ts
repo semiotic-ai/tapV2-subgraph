@@ -9,7 +9,8 @@ import {
     DataService
 } from '../generated/schema'
 const ZERO_BI = BigInt.fromI32(0)
-const ZERO_AD = Bytes.fromHexString('0x0000000000000000000000000000000000000000')
+const ZERO_AD = Address.zero()
+// Todo: add tap_collector string from env
 export const TAP_COLLECTOR = Address.fromString("")
 
 export function createOrLoadPayer(id: Bytes): Payer {
