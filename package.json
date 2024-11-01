@@ -5,7 +5,7 @@
     "node": "^18.0.0"
   },
   "scripts": {
-    "codegen": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml & graph codegen",
+    "codegen": "graph codegen",
     "build": "graph build",
     "prepare:sepolia": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "prepare:arb-sepolia": "mustache config/arb-sepolia.json subgraph.template.yaml > subgraph.yaml",
