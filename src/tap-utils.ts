@@ -1,4 +1,4 @@
-import { BigInt, Bytes } from '@graphprotocol/graph-ts'
+import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts'
 import {
     Payer,
     Receiver,
@@ -7,7 +7,7 @@ import {
     Collector
 } from '../generated/schema'
 const ZERO_BI = BigInt.fromI32(0)
-const ZERO_AD = Bytes.fromHexString('0x0000000000000000000000000000000000000000')
+const ZERO_AD = Address.zero()
 
 export function createOrLoadPayer(id: Bytes): Payer {
     let payer = Payer.load(id)

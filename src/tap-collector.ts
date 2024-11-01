@@ -6,7 +6,7 @@ import {
   PaymentCollected
 } from "../generated/TapCollector/TapCollector"
 /* eslint-disable prefer-const */
-import { BigInt, Bytes } from '@graphprotocol/graph-ts'
+import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts'
 import {
   Transaction,
   Payer,
@@ -17,8 +17,7 @@ import {
 } from '../generated/schema'
 import { createOrLoadEscrowAccount, createOrLoadPayer, createOrLoadReceiver, createOrLoadSigner } from "./tap-utils"
 let ZERO_BI = BigInt.fromI32(0)
-let ZERO_AD = Bytes.fromHexString('0x0000000000000000000000000000000000000000')
-
+let ZERO_AD = Address.zero()
 export function handleSignerAuthorized(event: SignerAuthorized): void {
   let signer = createOrLoadSigner(event.params.authorizedSigner)
   signer.isAuthorized = true
