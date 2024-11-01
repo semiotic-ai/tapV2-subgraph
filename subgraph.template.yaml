@@ -20,8 +20,8 @@ dataSources:
         - Sender
         - Receiver
         - Collector
-        - Transaction
         - Signer
+        - LatestRav
       abis:
         - name: TapCollector
           file: ./abis/TapCollector.json
@@ -37,6 +37,8 @@ dataSources:
           handler: handleSignerThawCanceled
         - event: SignerThawing(indexed address,indexed address,uint256)
           handler: handleSignerThawing
+        - event: RAVCollected(indexed address,indexed address,indexed address,uint64,uint128,bytes,bytes)
+          handler: handleRAVCollected
       file: ./src/tap-collector.ts
   - kind: ethereum
     name: PaymentsEscrow
@@ -54,7 +56,6 @@ dataSources:
         - Sender
         - Receiver
         - Collector
-        - Transaction
         - Signer
       abis:
         - name: PaymentsEscrow
@@ -68,4 +69,6 @@ dataSources:
           handler: handleThaw
         - event: Withdraw(indexed address,indexed address,indexed address,uint256)
           handler: handleWithdraw
+        - event: Initialized(uint64)
+          handler: handleInitialized
       file: ./src/payments-escrow.ts

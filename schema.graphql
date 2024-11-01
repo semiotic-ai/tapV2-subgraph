@@ -4,11 +4,32 @@ type EscrowAccount @entity{
     payer: Payer!
     collector: Collector!
     receiver: Receiver!
-    payer: Payer!
     balance: BigInt!
     totalAmountThawing: BigInt!
     thawEndTimestamp: BigInt!
-    transactions: [Transaction!]! @derivedFrom(field: "escrowAccount") 
+}
+
+type Collector @entity{
+  id: Bytes!
+  type: String
+  escrowAccounts: [EscrowAccount!]! @derivedFrom(field: "collector")
+}
+
+# Will contain only the latest rav
+type LatestRav @entity{
+    id: Bytes!
+    payer: Payer!
+    dataService: DataService!
+    serviceProvider: Receiver!
+    valueAggregate: BigInt!
+    timestamp: BigInt!
+    metadata: Bytes!
+    signature:Bytes!
+}
+
+type DataService @entity{
+  id: Bytes!
+  latestRav: [LatestRav!]! @derivedFrom(field: "dataService")
 }
 
 # Represents the gateway
@@ -17,7 +38,6 @@ type Payer @entity {
   id: Bytes!
   # Payer Escrow
   escrowAccounts: [EscrowAccount!]! @derivedFrom(field: "payer")
-  transactions: [Transaction!]! @derivedFrom(field: "payer")
   signers: [Signer!]! @derivedFrom(field: "payer")
 }
 
@@ -26,30 +46,6 @@ type Receiver @entity {
   # receiver address
   id: Bytes!
   escrowAccounts: [EscrowAccount!]! @derivedFrom(field: "receiver")
-  transactions: [Transaction!]! @derivedFrom(field: "receiver")
-}
-
-# Represents the data service
-type Collector @entity {
-  # receiver address
-  id: Bytes!
-  isAuthorized: Boolean!
-  thawEndTimestamp: BigInt! 
-  escrowAccounts: [EscrowAccount!]! @derivedFrom(field: "collector")
-  transactions: [Transaction!]! @derivedFrom(field: "collector")
-}
-
-type Transaction @entity(immutable: true){
-  id: Bytes!
-  transactionGroupID: Bytes!
-  type: String!
-  payer: Payer!
-  receiver: Receiver!
-  collector: Collector!
-  tokens: BigInt!
-  paymentType: Int
-  escrowAccount: EscrowAccount!
-  timestamp: BigInt!
 }
 
 type Signer @entity{

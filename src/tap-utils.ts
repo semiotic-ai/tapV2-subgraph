@@ -4,10 +4,15 @@ import {
     Receiver,
     EscrowAccount,
     Signer,
-    Collector
+    Collector,
+    LatestRav,
+    DataService
 } from '../generated/schema'
 const ZERO_BI = BigInt.fromI32(0)
 const ZERO_AD = Address.zero()
+
+
+export const TAP_COLLECTOR = Address.fromString(String(process.env.COLLECTOR_ADDRESS));
 
 export function createOrLoadPayer(id: Bytes): Payer {
     let payer = Payer.load(id)
@@ -31,6 +36,11 @@ export function createOrLoadCollector(id: Bytes): Collector {
     let collector = Collector.load(id)
     if (collector == null) {
         collector = new Collector(id)
+        if (id == TAP_COLLECTOR) {
+            collector.type = "TAP"
+        } else {
+            collector.type = "unknown"
+        }
         collector.save()
     }
     return collector as Collector
@@ -63,4 +73,30 @@ export function createOrLoadEscrowAccount(payer: Bytes, collector: Bytes, receiv
         escrowAccount.save()
     }
     return escrowAccount as EscrowAccount
+}
+
+export function createOrLoadLatestRav(payer: Bytes, dataService: Bytes, serviceProvider: Bytes): LatestRav {
+    let latest_rav_id = payer.concat(dataService).concat(serviceProvider)
+    let latestRav = LatestRav.load(latest_rav_id)
+    if (latestRav == null) {
+        latestRav = new LatestRav(latest_rav_id)
+        latestRav.valueAggregate = ZERO_BI
+        latestRav.timestamp = ZERO_BI
+        latestRav.serviceProvider = serviceProvider
+        latestRav.payer = payer
+        latestRav.dataService = dataService
+        latestRav.metadata = Bytes.empty()
+        latestRav.signature = Bytes.empty()
+        latestRav.save()
+    }
+    return latestRav as LatestRav
+}
+
+export function createOrLoadDataService(id: Bytes): DataService {
+    let dataService = DataService.load(id)
+    if (dataService == null) {
+        dataService = new DataService(id)
+        dataService.save()
+    }
+    return dataService as DataService
 }
