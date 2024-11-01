@@ -10,8 +10,9 @@ import {
 } from '../generated/schema'
 const ZERO_BI = BigInt.fromI32(0)
 const ZERO_AD = Address.zero()
-// Todo: add tap_collector string from env
-export const TAP_COLLECTOR = Address.fromString("")
+
+
+export const TAP_COLLECTOR = Address.fromString(String(process.env.COLLECTOR_ADDRESS));
 
 export function createOrLoadPayer(id: Bytes): Payer {
     let payer = Payer.load(id)

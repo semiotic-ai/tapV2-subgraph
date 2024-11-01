@@ -1,10 +1,14 @@
 # Graph CLI generated artifacts
 build/
 generated/
+subgraph.yaml
+
 
 # Dependency directories
 node_modules/
 jspm_packages/
+
+
 
 # Logs
 logs
