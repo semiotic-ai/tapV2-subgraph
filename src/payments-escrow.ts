@@ -10,8 +10,6 @@ import { BigInt, Address } from '@graphprotocol/graph-ts';
 import { createOrLoadCollector, createOrLoadEscrowAccount, createOrLoadPayer, createOrLoadReceiver, TAP_COLLECTOR } from "./tap-utils"
 
 const ZERO_BI = BigInt.fromI32(0)
-// Todo receive actual address
-const COLLECTOR_ADDRESS = Address.fromString("0x0000000000000000000000000000000000000001");
 
 // This will run at the begining of the contract so TAP collector is created
 // yes this is redundant but its a needed thing for indexer-rs to
@@ -36,9 +34,8 @@ export function handleThaw(event: Thaw): void {
 }
 
 export function handleCancelThaw(event: CancelThaw): void {
-  // TODO: The contract/abi needs to be updated since here collector is not included and it should be
-  // This is not our fault but rather a mistake from E&N so need to wait for the to fix it
-  let escrow = createOrLoadEscrowAccount(event.params.payer, COLLECTOR_ADDRESS, event.params.receiver)
+  // TODO: receive actual address
+  let escrow = createOrLoadEscrowAccount(event.params.payer, TAP_COLLECTOR, event.params.receiver)
   escrow.totalAmountThawing = ZERO_BI
   escrow.thawEndTimestamp = ZERO_BI
   escrow.save()
