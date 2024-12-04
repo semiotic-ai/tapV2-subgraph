@@ -6,10 +6,10 @@
   },
   "scripts": {
     "codegen": "graph codegen",
-    "build": "graph build",
+    "build": "node replace-env.js && graph build",
     "prepare:sepolia": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
     "prepare:arb-sepolia": "mustache config/arb-sepolia.json subgraph.template.yaml > subgraph.yaml",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ tap-v2",
+    "deploy": "node replace-env && graph deploy --node https://api.studio.thegraph.com/deploy/ tap-v2",
     "create-local": "graph create --node http://localhost:8020/ tap-v2",
     "remove-local": "graph remove --node http://localhost:8020/ tap-v2",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 tap-v2",
