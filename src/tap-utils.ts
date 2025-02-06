@@ -11,8 +11,7 @@ import {
 const ZERO_BI = BigInt.fromI32(0)
 const ZERO_AD = Address.zero()
 
-
-export const TAP_COLLECTOR = Address.fromString(String(process.env.COLLECTOR_ADDRESS));
+export const TAP_COLLECTOR = Address.fromString("{COLLECTOR_ADDRESS}");
 
 export function createOrLoadPayer(id: Bytes): Payer {
     let payer = Payer.load(id)

@@ -52,6 +52,10 @@ It will stop indexing the old code, and start the new one in its place.
 
 ### filling .env
 
-There are contract addresses in `.env.exmaple` that must be chosen
-based on the network. Put them into a `.env` for proper usage
+The subgraph can't load a `.env` by itself because all handlers are compiled and stored in IPFS.
+In this scenario, the environment variables have to be already loaded in the code itself. A script in the
+root called `replace-env.js` is provided and used in the scripts to handle this problem. 
 
+
+There are contract addresses in `.env.exmaple` that must be chosen
+based on the network. Put them into a `.env` for proper usage.
